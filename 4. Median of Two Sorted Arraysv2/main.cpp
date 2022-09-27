@@ -10,6 +10,7 @@ void print(int A[], int p, int q) {
     }
     std::cout << std::endl;
 }
+
 double get_median(int C[], int p, int q) {
     int n = q - p;
     if (n%2 == 1) {
