@@ -11,18 +11,17 @@ struct ListNode {
     ListNode(int x, ListNode *next) : val(x), next(next) {}
  };
 
-void push_back(ListNode* head, int val) {
-    ListNode *tmp = head;
-    if (head == nullptr) {
-        head = new ListNode(val);
-        delete tmp;
+void push_back(ListNode** head_ref, int val) {
+    ListNode *new_head = new ListNode(val);
+    if (*head_ref == nullptr) {
+        *head_ref = new_head;
         return;
     }
+    ListNode *tmp = *head_ref;
     while (tmp->next != nullptr) {
         tmp = tmp->next;
     }
-    tmp->next = new ListNode(val);
-    return;
+    tmp->next = new_head;
 }
 ListNode* push_back(ListNode* head, ListNode* node_to_add) {
     ListNode *tmp = head;
@@ -53,25 +52,19 @@ ListNode* merge(ListNode* a, ListNode* b) {
     ListNode* newList = nullptr;
     ListNode* tmp = a;
     ListNode* help = b;
-    if (tmp->val < help->val) {
-        newList = new ListNode(tmp->val);
-        tmp = tmp->next;
-    } else {
-        newList = new ListNode(help->val);
-        help = help->next;
-    }
+
     while (tmp != nullptr or help != nullptr) {
         if (help == nullptr) {
-            push_back(newList, tmp->val);
+            push_back(&newList, tmp->val);
             tmp = tmp->next;
         } else if (tmp == nullptr) {
-            push_back(newList, help->val);
+            push_back(&newList, help->val);
             help = help->next;
         } else if (tmp->val < help->val) {
-            push_back(newList, tmp->val);
+            push_back(&newList, tmp->val);
             tmp = tmp->next;
         } else {
-            push_back(newList, help->val);
+            push_back(&newList, help->val);
             help = help->next;
         }
     }
@@ -100,36 +93,36 @@ void delete_list(ListNode* head) {
 int main() {
 
     ListNode *head = new ListNode(3);
-    push_back(head, 5);
-    push_back(head, 7);
-    push_back(head, 8);
+    push_back(&head, 5);
+    push_back(&head, 7);
+    push_back(&head, 8);
     ListNode *head2 = new ListNode(2);
-    push_back(head2, 3);
-    push_back(head2, 3);
-    push_back(head2, 3);
-    push_back(head2, 3);
-    push_back(head2, 3);
-    push_back(head2, 3);
+    push_back(&head2, 3);
+    push_back(&head2, 3);
+    push_back(&head2, 3);
+    push_back(&head2, 3);
+    push_back(&head2, 3);
+    push_back(&head2, 3);
     ListNode *list = new ListNode(15);
-    push_back(list, 32);
-    push_back(head2, 35);
-    push_back(head2, 38);
-    push_back(head2, 39);
-    push_back(head2, 43);
-    push_back(head2, 63);
+    push_back(&list, 32);
+    push_back(&head2, 35);
+    push_back(&head2, 38);
+    push_back(&head2, 39);
+    push_back(&head2, 43);
+    push_back(&head2, 63);
     ListNode* list2 = new ListNode(0);
-    push_back(list2,1);
-    push_back(list2,2);
-    push_back(list2,4);
-    push_back(list2,5);
-    push_back(list2,6);
-    push_back(list2,7);
-    push_back(list2,8);
-    push_back(list2,9);
-    push_back(list2,10);
-    push_back(list2,11);
-    push_back(list2,12);
-    push_back(list2,13);
+    push_back(&list2,1);
+    push_back(&list2,2);
+    push_back(&list2,4);
+    push_back(&list2,5);
+    push_back(&list2,6);
+    push_back(&list2,7);
+    push_back(&list2,8);
+    push_back(&list2,9);
+    push_back(&list2,10);
+    push_back(&list2,11);
+    push_back(&list2,12);
+    push_back(&list2,13);
     print(head);
     print(head2);
     print(list);
